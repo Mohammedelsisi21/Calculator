@@ -3,8 +3,15 @@
     margin: 0px;
     padding: 0px;
 }
+:root {
+    --head-btn-color: #504e53;
+    --bady-btn-color: #272a31;
+    --shift-color: #fbc128;
+    --alpha-color: #7064b8;
+    --del-ac-color: #e68f52;
+}
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 .container {
     padding-left: 15px;
@@ -36,8 +43,8 @@ body {
     z-index: 1000000000000000000;
     display: flex;
 }
-#preloader:before,
-#preloader:after {
+#preloader::before,
+#preloader::after {
     content: "";
     position: absolute;
     left: 0;
@@ -50,7 +57,7 @@ body {
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
-#preloader:after {
+#preloader::after {
     left: auto;
     right: 0;
 }
@@ -119,4 +126,142 @@ body {
         -o-transform: translateY(200%);
         transform: translateY(200%);
     }
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50% ;
+    left: 50% ;
+    transform: translate(-50%, -50%);
+}
+.parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 350px;
+    position: relative;
+    padding: 10px;
+    border: 1px solid #C4C4C4;
+    background-color: #13171b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.parent::after {
+
+}
+.parent::before {
+
+}
+.screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.screen input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    background: #d4e4e3;
+    padding: 5px 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+.screen .input {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 70%;
+}
+.screen .output {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: end;
+    height: 30%;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0px;
+    gap: 15px;
+}
+.head-btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    justify-content: space-between;
+}
+.btn-parent {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.btn-parent div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: bold;
+    width: 80%;
+}
+.btn-parent .lab-shi{
+    color: var(--shift-color);
+    display: block;
+}
+.btn-parent .lab-alph{
+    color: var(--alpha-color);
+    display: block;
+}
+
+.head-btn input, button{
+    width: 52px;
+    margin: auto;
+    padding: 8px 1px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--head-btn-color);
+    outline: none;
+    border: none;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.shift-btn {
+    color: #000 !important;
+    background: var(--shift-color) !important;
+}
+.alpha-btn {
+    background: var(--alpha-color) !important;
+}
+.body-btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.body-btn input ,.body-btn button{
+    width: 60px;
+    margin: auto;
+    padding: 8px 1px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--bady-btn-color);
+    outline: none;
+    border: none;
+    font-weight: bold;
+    font-size: larger;
+}
+.body-btn .del-btn {
+    background: var(--del-ac-color) !important;
+    color: black !important;
 }
