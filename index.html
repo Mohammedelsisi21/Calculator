@@ -13,17 +13,20 @@
     <!-- <div id="preloader">
         <div class="loader_line"></div>
     </div> -->
-    <div class="calculator">
-      <!-- <button id="light-mode-toggle" class="light-mode-toggle">
-        <i class="fas fa-sun" id="icon"></i>
-      </button> -->
-      <button class="open-btn">
-        <i class="fa-solid fa-lock-open icon-lok"></i>
-      </button>
+    <div class="calculator" id="calculator">
+      <div class="nav">
+        <button class="open-btn">
+          Open
+          <i class="fa-solid fa-unlock icon-lok"></i>
+        </button>
+        <button id="light-mode-toggle" class="light-mode-toggle">
+          <i class="fas fa-sun" id="iconDark"></i>
+        </button>
+      </div>
       <div class="container">
         <div class="parent">
             <a class="site-logo" href="#">
-                <div class="logo">
+                <div class="logo" id="logo-dark">
                     <span style="--i:1">C</span>
                     <span style="--i:2">a</span>
                     <span style="--i:3">s</span>
@@ -32,7 +35,7 @@
                 </div>
             </a>
             <div class="screen">
-              <input type="text" class="input" id="input" disabled value="5555"></input>
+              <input type="text" class="input"  id="input" disabled value="5555"></input>
               <input type="text" class="output" id="output" disabled value="5555"></input>
             </div>
             <div class="buttons">
@@ -235,9 +238,6 @@
       </div>
   
     </div>
-    <script src="js/icons.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 </body>
 </html>

@@ -94,9 +94,8 @@ body {
     -webkit-animation: lineheight 1000ms ease-in-out 0s forwards;
     -o-animation: lineheight 1000ms ease-in-out 0s forwards;
     animation: lineheight 1000ms ease-in-out 0s forwards;
-  }
-  
-  .loader_line:after {
+}
+.loader_line:after {
     content: "";
     position: absolute;
     left: 0;
@@ -139,10 +138,12 @@ body {
     background-color: #000;
     transition: background-color var(--transition--main), color var(--transition--main);
 }
-
 /* Start logo */
 .site-logo {
     padding: 20px 0px;
+}
+.logo-dark {
+    color: black !important;
 }
 .site-logo .logo {
     position: relative;
@@ -187,6 +188,7 @@ body {
     top: 50% ;
     left: 50% ;
     transform: translate(-50%, -50%);
+    margin-top: 25px;
 }
 .parent {
     display: flex;
@@ -227,11 +229,25 @@ body {
 .parent.close::before {
     animation: close 2s linear forwards;
 }
-
-.open-btn {
+.parent.color-change::after,
+.parent.color-change::before {
+    background: #e2e4ee !important;
+}
+.nav {
     position: absolute;
-    top: 4px;
-    left: 20%;
+    top: 0px;
+    width: 50%;
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+@media (max-width: 767px){
+    .nav {
+        margin: 50px auto !important;
+    }
+}
+.open-btn {
     padding: 10px;
     border: 0;
     border-radius: 10px;
@@ -240,11 +256,40 @@ body {
     font-size: 20px;
     font-weight: bold;
     transition: var(--transition--main);
+    cursor: pointer;
 }
 .open-btn:hover {
     background: rgb(0,0,0,.8);
+}
+/* Dark Mode */
+.light-mode-toggle, .light {
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: var(--transition--main);
     cursor: pointer;
 }
+.light-mode-toggle {
+    background: #000 ;
+    color: #fff ;
+}
+.light-mode-toggle:hover {
+    background: rgb(0,0,0,.8);
+}
+.light {
+    background: #ffff !important;
+    color: black !important;
+}
+.dark {
+    background: #000 !important;
+    color: white !important;
+}
+.lab-alph-light {
+    color: #ff0000 !important;
+}
+/* End Dark */
 .screen {
     display: flex;
     align-items: center;
@@ -252,6 +297,10 @@ body {
     height: 100px;
     display: flex;
     flex-wrap: wrap;
+}
+.screen-dark {
+    background: black !important;
+    color: white !important;
 }
 .screen input[type="text"] {
     width: 100%;
@@ -315,6 +364,7 @@ body {
     font-size: 10px;
     font-weight: bold;
 }
+
 
 .head-btn input, .head-btn button{
     width: 52px;
