@@ -10,9 +10,9 @@
     
 </head>
 <body>
-    <!-- <div id="preloader">
+    <div id="preloader">
         <div class="loader_line"></div>
-    </div> -->
+    </div>
     <div class="calculator" id="calculator">
       <div class="nav">
         <button class="open-btn">
@@ -35,8 +35,8 @@
                 </div>
             </a>
             <div class="screen">
-              <input type="text" class="input"  id="input" disabled value="5555"></input>
-              <input type="text" class="output" id="output" disabled value="5555"></input>
+              <input type="text" class="input"  id="input" disabled></input>
+              <input type="text" class="output" id="output" disabled></input>
             </div>
             <div class="buttons">
               <div class="head-btn">
@@ -208,31 +208,57 @@
                   <input type="button" value="M+" class="button">
                 </div>
               </div>
-              <div class="body-btn">
+              <!-- <div class="body-btn">
                 <input type="button" value="7" class="button">
                 <input type="button" value="8" class="button">
                 <input type="button" value="9" class="button">
-                <button class="button del-btn"><i class="fa-solid fa-delete-left"></i></button>
-                <input type="button" value="AC" class="button del-btn">
+                <button class="button del-btn operator"><i class="fa-solid fa-delete-left"></i></button>
+                <input type="button operator" value="AC" class="button del-btn">
       
                 <input type="button" value="4" class="button">
                 <input type="button" value="5" class="button">
                 <input type="button" value="6" class="button">
-                <button class="button"><i class="fa-solid fa-xmark"></i></button>
-                <button class="button"><i class="fa-solid fa-divide"></i></button>
+                <button class="button operator"><i class="fa-solid fa-xmark"></i></button>
+                <button class="button operator"><i class="fa-solid fa-divide"></i></button>
                 
                 <input type="button" value="1" class="button">
                 <input type="button" value="2" class="button">
                 <input type="button" value="3" class="button">
-                <button class="button"><i class="fa-solid fa-plus"></i></button>
-                <button class="button"><i class="fa-solid fa-minus"></i></button>
+                <button class="button operator"><i class="fa-solid fa-plus"></i></button>
+                <button class="button operator"><i class="fa-solid fa-minus"></i></button>
       
                 <input type="button" value="0" class="button">
                 <input type="button" value="." class="button">
-                <input type="button" value="EXP" class="button">
-                <input type="button" value="Ans" class="button">
+                <input type="button operator" value="EXP" class="button">
+                <input type="button operator" value="Ans" class="button">
                 <button class="button"><i class="fa-solid fa-equals"></i></button>
+              </div> -->
+              <div class="body-btn">
+                <input type="button" value="7" class="button number">
+                <input type="button" value="8" class="button number">
+                <input type="button" value="9" class="button number">
+                <button class="button operator" data-op="delete"><i class="fa-solid fa-delete-left"></i></button>
+                <input type="button" value="AC" class="button operator" data-op="clear">
+                
+                <input type="button" value="4" class="button number">
+                <input type="button" value="5" class="button number">
+                <input type="button" value="6" class="button number">
+                <button class="button operator" data-op="multiply"><i class="fa-solid fa-xmark"></i></button>
+                <button class="button operator" data-op="divide"><i class="fa-solid fa-divide"></i></button>
+                
+                <input type="button" value="1" class="button number">
+                <input type="button" value="2" class="button number">
+                <input type="button" value="3" class="button number">
+                <button class="button operator" data-op="add"><i class="fa-solid fa-plus"></i></button>
+                <button class="button operator" data-op="subtract"><i class="fa-solid fa-minus"></i></button>
+              
+                <input type="button" value="0" class="button number">
+                <input type="button" value="." class="button number">
+                <input type="button" value="EXP" class="button operator" data-op="exp">
+                <input type="button" value="Ans" class="button operator" data-op="ans">
+                <button class="button operator" data-op="equals"><i class="fa-solid fa-equals"></i></button>
               </div>
+              
             </div>
         </div>
       </div>
