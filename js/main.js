@@ -72,10 +72,60 @@ lightMode.addEventListener('click', () => {
 
 
 // script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     let lastValue = '';
-        document.querySelectorAll('.button').forEach(button => {
+
+    const handleInput = (value, isOperator = false) => {
+        if (isOperator) {
+            switch (value) {
+                case 'clear':
+                    input.value = '';
+                    output.value = '';
+                    lastValue = '';
+                    break;
+                case 'delete':
+                    input.value = input.value.slice(0, -1);
+                    break;
+                case 'exp':
+                    input.value += '**';
+                    break;
+                case 'ans':
+                    input.value += lastValue;
+                    break;
+                case 'equals':
+                    try {
+                        const result = eval(input.value);
+                        output.value = result;
+                        lastValue = result;
+                        input.value = '';
+                    } catch (error) {
+                        output.value = 'Error';
+                    }
+                    break;
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                    input.value += value;
+                    break;
+            }
+        } else {
+            input.value += value;
+        }
+
+        // تحديث الفورم بشكل فوري إذا لم يكن هناك طلب للنتيجة
+        if (value !== 'equals') {
+            try {
+                const evalResult = eval(input.value);
+                output.value = evalResult;
+            } catch (error) {
+                output.value = 'Error';
+            }
+        }
+    };
+
+    // التعامل مع الضغط على الأزرار
+    document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', (e) => {
             const value = e.target.value || e.target.innerText;
             const op = e.target.getAttribute('data-op');
@@ -95,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         input.value = input.value.slice(0, -1);
                         break;
                     case 'exp':
-                        input.value += '**';  // Use '**' for exponentiation
+                        input.value += '**'; 
                         break;
                     case 'ans':
                         input.value += lastValue;  // Use last result
@@ -134,4 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    document.addEventListener('keydown', (e) => {
+        const key = e.key;
+
+        if (!isNaN(key) || key === '.') {
+            handleInput(key);
+        } else if (['+', '-', '*', '/'].includes(key)) {
+            handleInput(key, true);
+        } else if (key === 'Enter') {
+            handleInput('equals', true);
+        } else if (key === 'Backspace') {
+            handleInput('delete', true);
+        } else if (key === 'Escape') {
+            handleInput('clear', true);
+        }
+    });
 });
+
