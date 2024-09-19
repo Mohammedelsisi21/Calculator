@@ -15,7 +15,9 @@
 
 ## Project Screenshot
 
-<img src="./image/1.png" width="25%" alt="Project ScreenShot">
-<img src="./image/2.png" width="25%" alt="Project ScreenShot">
-<img src="./image/3.png" width="25%" alt="Project ScreenShot">
-<img src="./image/4.png" width="25%" alt="Project ScreenShot">
+<img src="./image/1.png" width="50%" alt="Project ScreenShot" style="display: inline-block;">
+<img src="./image/2.png" width="50%" alt="Project ScreenShot" style="display: inline-block;">
+<img src="./image/3.png" width="50%" alt="Project ScreenShot" style="display: inline-block;">
+<img src="./image/4.png" width="50%" alt="Project ScreenShot" style="display: inline-block;">
+
+
