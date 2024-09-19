@@ -9,8 +9,9 @@ const logoDark = document.getElementById('logo-dark');
 const input = document.getElementById('input')
 const output = document.getElementById('output')
 const labAlpha = document.querySelectorAll('.lab-alph')
+const leftButton = document.getElementById('left');
+const rightButton = document.getElementById('right');
 
-console.log("ssss")
 // Start load
 window.addEventListener("load", function () {
     let preloader = document.querySelector("#preloader");
@@ -70,11 +71,25 @@ lightMode.addEventListener('click', () => {
 });
 
 
-
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     let lastValue = '';
-    const handleInput = (value, isOperator = false) => {
+    leftButton.addEventListener('click', () => {
+        const cursorPosition = input.selectionStart;
+        if (cursorPosition > 0) {
+            input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+        }
+        input.focus()
+    });
+    
+    rightButton.addEventListener('click', () => {
+        const cursorPosition = input.selectionStart;
+        if (cursorPosition < input.value.length) {
+            input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+        }
+        input.focus()
+    });
+            const handleInput = (value, isOperator = false) => {
         if (isOperator) {
             switch (value) {
                 case 'clear':
@@ -93,7 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'equals':
                     try {
-                        const result = eval(input.value);
+                        let expression = input.value
+                            .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                            .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
+                            .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`);
+                        
+                        const result = eval(expression);
                         output.value = result;
                         lastValue = result;
                         input.value = '';
@@ -111,11 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             input.value += value;
         }
-
-        // تحديث الفورم بشكل فوري إذا لم يكن هناك طلب للنتيجة
         if (value !== 'equals') {
             try {
-                const evalResult = eval(input.value);
+                let expression = input.value
+                    .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                    .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
+                    .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`);
+                
+                const evalResult = eval(expression);
                 output.value = evalResult;
             } catch (error) {
                 output.value = 'Error';
@@ -123,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // التعامل مع الضغط على الأزرار
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', (e) => {
             const value = e.target.value || e.target.innerText;
@@ -136,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'clear':
                         input.value = '';
                         output.value = '';
-                        currentOperation = '';
                         lastValue = '';
                         break;
                     case 'delete':
@@ -146,12 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         input.value += '**'; 
                         break;
                     case 'ans':
-                        input.value += lastValue;  // Use last result
+                        input.value += lastValue; 
                         break;
                     case 'equals':
                         try {
-                            // Evaluate the expression
-                            const result = eval(input.value);
+                            let expression = input.value
+                                .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(${degreesToRadians(p1)})}`)
+                                .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(${degreesToRadians(p1)})}`)
+                                .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})}`);
+                            
+                            const result = eval(expression);
                             output.value = result;
                             lastValue = result;
                             input.value = '';
@@ -163,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'subtract':
                     case 'multiply':
                     case 'divide':
-                        // Add the operator to the input string
                         input.value += (op === 'add' ? '+' : 
                                         op === 'subtract' ? '-' : 
                                         op === 'multiply' ? '*' : 
@@ -174,7 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update output immediately
             if (op !== 'equals') {
                 try {
-                    const evalResult = eval(input.value);
+                    let expression = input.value
+                        .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(${degreesToRadians(p1)})`)
+                        .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(${degreesToRadians(p1)})`)
+                        .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})`);
+                    
+                    const evalResult = eval(expression);
                     output.value = evalResult;
                 } catch (error) {
                     output.value = 'Error';
@@ -198,4 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
             handleInput('clear', true);
         }
     });
+
+    // Helper function to convert degrees to radians
+    function degreesToRadians(degrees) {
+        return degrees * (Math.PI / 180);
+    }
 });
