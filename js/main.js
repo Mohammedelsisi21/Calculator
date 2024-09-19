@@ -74,7 +74,6 @@ lightMode.addEventListener('click', () => {
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     let lastValue = '';
-
     const handleInput = (value, isOperator = false) => {
         if (isOperator) {
             switch (value) {
@@ -131,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const op = e.target.getAttribute('data-op');
             
             if (e.target.classList.contains('number')) {
-                // Append number or decimal point to current input
                 input.value += value;
             } else if (op) {
                 switch (op) {
