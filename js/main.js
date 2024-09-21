@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         input.focus()
     });
-    
     rightButton.addEventListener('click', () => {
         const cursorPosition = input.selectionStart;
         if (cursorPosition < input.value.length) {
@@ -98,7 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     lastValue = '';
                     break;
                 case 'delete':
-                    input.value = input.value.slice(0, -1);
+                    const cursorPosition = input.selectionStart;
+                    if (cursorPosition > 0) {
+                        input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
+                        input.setSelectionRange(cursorPosition - 1, cursorPosition - 1); // Keep cursor position
+                    }
                     break;
                 case 'exp':
                     input.value += '**';
@@ -174,10 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         output.value = '';
                         lastValue = '';
                         break;
-                    case 'delete':
-                        input.value = input.value.slice(0, -1);
-                        break;
-                    case 'exp':
+                        case 'delete':
+                            const cursorPosition = input.selectionStart;
+                            if (cursorPosition > 0) {
+                                input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
+                                input.setSelectionRange(cursorPosition - 1, cursorPosition - 1); // Keep cursor position
+                            }
+                            break;
+                                            case 'exp':
                         input.value += '**'; 
                         break;
                     case 'ans':
