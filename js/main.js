@@ -115,7 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                             .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                             .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                            .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
+                            .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                            .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                            .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                            .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
+
 
                         const result = eval(expression);
                         output.value = result;
@@ -144,8 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                     .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                     .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                    .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
-                
+                    .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                    .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                    .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                    .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
                 const evalResult = eval(expression);
                 output.value = evalResult;
             } catch (error) {
@@ -186,7 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                                 .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                                 .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                                .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
+                                .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                                .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                                .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                                .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
 
                             
                             const result = eval(expression);
@@ -218,8 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                         .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                         .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                        .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
-                        
+                        .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                        .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                        .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                        .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
                         const evalResult = eval(expression);
                     output.value = evalResult;
                 } catch (error) {
