@@ -11,7 +11,7 @@ const output = document.getElementById('output')
 const labAlpha = document.querySelectorAll('.lab-alph')
 const leftButton = document.getElementById('left');
 const rightButton = document.getElementById('right');
-
+const negativeBtn =document.getElementById("negative-btn")
 // Start load
 window.addEventListener("load", function () {
     let preloader = document.querySelector("#preloader");
@@ -111,8 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         let expression = input.value
                             .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                             .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
-                            .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`);
-                        
+                            .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
+                            .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                            .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                            .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
+
                         const result = eval(expression);
                         output.value = result;
                         lastValue = result;
@@ -136,7 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let expression = input.value
                     .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                     .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
-                    .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`);
+                    .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
+                    .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                    .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                    .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
                 
                 const evalResult = eval(expression);
                 output.value = evalResult;
@@ -174,7 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             let expression = input.value
                                 .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(${degreesToRadians(p1)})}`)
                                 .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(${degreesToRadians(p1)})}`)
-                                .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})}`);
+                                .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})}`)
+                                .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                                .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                                .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
                             
                             const result = eval(expression);
                             output.value = result;
@@ -201,7 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     let expression = input.value
                         .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(${degreesToRadians(p1)})`)
                         .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(${degreesToRadians(p1)})`)
-                        .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})`);
+                        .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})`)
+                        .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                        .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                        .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
                     
                     const evalResult = eval(expression);
                     output.value = evalResult;
@@ -227,9 +239,22 @@ document.addEventListener('DOMContentLoaded', () => {
             handleInput('clear', true);
         }
     });
-
-    // Helper function to convert degrees to radians
     function degreesToRadians(degrees) {
         return degrees * (Math.PI / 180);
     }
 });
+
+
+
+
+
+function factorial(n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+function permutation(n, r) {
+    return factorial(n) / factorial(n - r);
+}
+function combination(n, r) {
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}

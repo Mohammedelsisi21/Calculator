@@ -249,7 +249,7 @@ body {
 }
 @media (max-width: 767px){
     .nav {
-        margin: 50px auto !important;
+        margin: 1px auto !important;
     }
 }
 .open-btn {
