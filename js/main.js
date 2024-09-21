@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
                             .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                             .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                            .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
+                            .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                            .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
 
                         const result = eval(expression);
                         output.value = result;
@@ -142,7 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
                     .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                     .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                    .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
+                    .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                    .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
                 
                 const evalResult = eval(expression);
                 output.value = evalResult;
@@ -183,7 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})}`)
                                 .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                                 .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                                .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
+                                .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                                .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
+
                             
                             const result = eval(expression);
                             output.value = result;
@@ -213,9 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(${degreesToRadians(p1)})`)
                         .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                         .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                        .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`);
-                    
-                    const evalResult = eval(expression);
+                        .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                        .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`);
+                        
+                        const evalResult = eval(expression);
                     output.value = evalResult;
                 } catch (error) {
                     output.value = 'Error';
