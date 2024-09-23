@@ -91,24 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const handleInput = (value, isOperator = false) => {
         if (isOperator) {
             switch (value) {
-                case 'clear':
-                    input.value = '';
-                    output.value = '';
-                    lastValue = '';
-                    break;
-                case 'delete':
-                    const cursorPosition = input.selectionStart;
-                    if (cursorPosition > 0) {
-                        input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
-                        input.setSelectionRange(cursorPosition - 1, cursorPosition - 1); // Keep cursor position
-                    }
-                    break;
-                case 'exp':
-                    input.value += '**';
-                    break;
-                case 'ans':
-                    input.value += lastValue;
-                    break;
                 case 'equals':
                     try {
                         let expression = input.value
@@ -122,8 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                             .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                             .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-
-
                         const result = eval(expression);
                         output.value = result;
                         lastValue = result;
@@ -184,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 input.setSelectionRange(cursorPosition - 1, cursorPosition - 1); // Keep cursor position
                             }
                             break;
-                                            case 'exp':
+                    case 'exp':
                         input.value += '**'; 
                         break;
                     case 'ans':
