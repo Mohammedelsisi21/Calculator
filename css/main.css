@@ -251,9 +251,6 @@ body {
     .nav {
         margin: 1px auto !important;
     }
-    .parent {
-        border-radius: 0px;
-    }
 }
 .open-btn {
     padding: 10px;
