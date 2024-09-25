@@ -94,9 +94,11 @@ const handleInput = (value, isOperator = false) => {
             case 'equals':
                 try {
                     let expression = input.value
-                    .replace(/×/g, '*')
-                    .replace(/÷/g, '/')
-                    .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                        .replace(/×/g, '*')
+                        .replace(/÷/g, '/')
+                        .replace(/e/g, `${Math.E}`)
+                        .replace(/π/g, '3.14')
+                        .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                         .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
                         .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
                         .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
@@ -132,9 +134,11 @@ const handleInput = (value, isOperator = false) => {
     if (value !== 'equals') {
         try {
             let expression = input.value
-            .replace(/×/g, '*')
-            .replace(/÷/g, '/')
-            .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
+                .replace(/×/g, '*')
+                .replace(/÷/g, '/')
+                .replace(/e/g, `${Math.E}`)
+                .replace(/π/g, '3.14')
+                .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                 .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                 .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
                 .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
@@ -188,6 +192,9 @@ document.querySelectorAll('.button').forEach(button => {
                         let expression = input.value
                             .replace(/×/g, '*')
                             .replace(/÷/g, '/')
+                            .replace(/e/g, `${Math.E}`)
+                            .replace(/π/g, '3.14')
+                            
                             .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                             .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                             .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -203,7 +210,6 @@ document.querySelectorAll('.button').forEach(button => {
                             .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                             .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                             .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-
                         const result = eval(expression);
                         output.value = result;
                         lastValue = result;
@@ -230,6 +236,11 @@ document.querySelectorAll('.button').forEach(button => {
                 let expression = input.value
                     .replace(/×/g, '*')
                     .replace(/÷/g, '/')
+                    .replace(/e/g, `${Math.E}`)
+                    .replace(/π/g, '3.14')
+                    .replace(/bin\(([^)]+)\)/g, (match, p1) => `bin(${p1})`)
+                    .replace(/oct\(([^)]+)\)/g, (match, p1) => `oct(${p1})`)
+                    .replace(/hex\(([^)]+)\)/g, (match, p1) => `hexx(${p1})`)
                     .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                     .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                     .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -253,7 +264,6 @@ document.querySelectorAll('.button').forEach(button => {
         }
     });
 });
-
 
     document.addEventListener('keydown', (e) => {
         const key = e.key;
@@ -354,4 +364,20 @@ function negativesq(value) {
     const squaredValue = Math.pow(value, -1);
     const roundedValue = parseFloat(squaredValue.toFixed(10));
     return roundedValue;
+}
+
+function bin(num){
+    let convertedValue;
+    convertedValue = num.toString(2);
+    return convertedValue;
+}
+function oct(num){
+    let convertedValue;
+    convertedValue = num.toString(8);
+    return convertedValue;
+}
+function hexx(num){
+    let pava= parseInt(num)
+    console.log(pava)
+    return  pava.toString(16).toUpperCase();
 }
