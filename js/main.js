@@ -49,7 +49,7 @@ lightMode.addEventListener('click', () => {
     if (iconDark.classList.contains('fa-sun')) {
         iconDark.classList.remove('fa-sun');
         iconDark.classList.add('fa-moon');
-        lightMode.appendChild(iconDark); 
+        lightMode.appendChild(iconDark);
         parentElement.classList.add('color-change');
         parentElement.classList.add('light');
         lightMode.classList.add('light')
@@ -63,7 +63,7 @@ lightMode.addEventListener('click', () => {
         lightMode.classList.remove('light')
         openButton.classList.remove('light')
     }
-    // light 
+    // light
     calculator.classList.toggle('dark')
     logoDark.classList.toggle('logo-dark')
     input.classList.toggle('screen-dark')
@@ -88,66 +88,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         input.focus()
     });
-            const handleInput = (value, isOperator = false) => {
-        if (isOperator) {
-            switch (value) {
-                case 'equals':
-                    try {
-                        let expression = input.value
-                            .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
-                            .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
-                            .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
-                            .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
-                            .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                            .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                            .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
-                            .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
-                            .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
-                            .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-                        const result = eval(expression);
-                        output.value = result;
-                        lastValue = result;
-                        input.value = '';
-                    } catch (error) {
-                        output.value = 'Error';
-                    }
-                    break;
-                case '+':
-                case '-':
-                case '*':
-                case '/':
-                    input.value += value;
-                    break;
-            }
-        } else {
-            input.value += value;
+const handleInput = (value, isOperator = false) => {
+    if (isOperator) {
+        switch (value) {
+            case 'equals':
+                try {
+                    let expression = input.value
+                        .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                        .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
+                        .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
+                        .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                        .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                        .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                        .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                        .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                        .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                        .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
+                    const result = eval(expression);
+                    output.value = result;
+                    lastValue = result;
+                    input.value = '';
+                } catch (error) {
+                    output.value = 'Error';
+                }
+                break;
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                input.value += value;
+                break;
         }
-        if (value !== 'equals') {
-            try {
-                let expression = input.value
-                    .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
-                    .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
-                    .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
-                    .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
-                    .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                    .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                    .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
-                    .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
-                    .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
-                    .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-                const evalResult = eval(expression);
-                output.value = evalResult;
-            } catch (error) {
-                output.value = 'Error';
-            }
+    } else {
+        input.value += value;
+    }
+    if (value !== 'equals') {
+        try {
+            let expression = input.value
+                .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
+                .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
+                .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
+            const evalResult = eval(expression);
+            output.value = evalResult;
+        } catch (error) {
+            output.value = 'Error';
         }
-    };
+    }
+};
 
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', (e) => {
             const value = e.target.value || e.target.innerText;
             const op = e.target.getAttribute('data-op');
-            
+
             if (e.target.classList.contains('number')) {
                 input.value += value;
             } else if (op) {
@@ -157,18 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         output.value = '';
                         lastValue = '';
                         break;
-                        case 'delete':
-                            const cursorPosition = input.selectionStart;
-                            if (cursorPosition > 0) {
-                                input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
-                                input.setSelectionRange(cursorPosition - 1, cursorPosition - 1); // Keep cursor position
-                            }
-                            break;
+                    case 'delete':
+                        const cursorPosition = input.selectionStart;
+                        if (cursorPosition > 0) {
+                            input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
+                            input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                        }
+                        break;
                     case 'exp':
-                        input.value += '**'; 
+                        input.value += '**';
                         break;
                     case 'ans':
-                        input.value += lastValue; 
+                        input.value += lastValue;
                         break;
                     case 'equals':
                         try {
@@ -183,8 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                                 .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                                 .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-
-                            
                             const result = eval(expression);
                             output.value = result;
                             lastValue = result;
@@ -197,14 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'subtract':
                     case 'multiply':
                     case 'divide':
-                        input.value += (op === 'add' ? '+' : 
-                                        op === 'subtract' ? '-' : 
-                                        op === 'multiply' ? '*' : 
+                        input.value += (op === 'add' ? '+' :
+                                        op === 'subtract' ? '-' :
+                                        op === 'multiply' ? '*' :
                                         '/');
                         break;
                 }
             }
-            // Update output immediately
             if (op !== 'equals') {
                 try {
                     let expression = input.value
@@ -229,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
         const key = e.key;
-
         if (!isNaN(key) || key === '.') {
             handleInput(key);
         } else if (['+', '-', '*', '/'].includes(key)) {
@@ -246,9 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return degrees * (Math.PI / 180);
     }
 });
-
-
-
 
 
 function factorial(n) {
