@@ -194,7 +194,6 @@ document.querySelectorAll('.button').forEach(button => {
                             .replace(/÷/g, '/')
                             .replace(/e/g, `${Math.E}`)
                             .replace(/π/g, '3.14')
-                            
                             .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                             .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                             .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
