@@ -142,7 +142,6 @@ const handleInput = (value, isOperator = false) => {
         }
     }
 };
-
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', (e) => {
             const value = e.target.value || e.target.innerText;
