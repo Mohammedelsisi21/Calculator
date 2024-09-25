@@ -94,7 +94,9 @@ const handleInput = (value, isOperator = false) => {
             case 'equals':
                 try {
                     let expression = input.value
-                        .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                         .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
                         .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
                         .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
@@ -103,6 +105,9 @@ const handleInput = (value, isOperator = false) => {
                         .replace(/ln\(([^)]+)\)/g, (match, p1) => `ln(${p1})`)
                         .replace(/log\(([^,]+),?([^)]*)\)/g, (match, p1, p2) => `log(${p1}, ${p2})`)
                         .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                        .replace(/(\d+)\s*²/g, (match, p1) => `square(${p1})`)
+                        .replace(/(\d+)\s*³/g, (match, p1) => `cube(${p1})`)
+                        .replace(/(\d+)\s*⁻¹/g, (match, p1) => `negativesq(${p1})`)
                         .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                         .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                         .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`)
@@ -127,7 +132,9 @@ const handleInput = (value, isOperator = false) => {
     if (value !== 'equals') {
         try {
             let expression = input.value
-                .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
+            .replace(/×/g, '*')
+            .replace(/÷/g, '/')
+            .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                 .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                 .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
                 .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
@@ -136,6 +143,9 @@ const handleInput = (value, isOperator = false) => {
                 .replace(/ln\(([^)]+)\)/g, (match, p1) => `ln(${p1})`)
                 .replace(/log\(([^,]+),?([^)]*)\)/g, (match, p1, p2) => `log(${p1}, ${p2})`)
                 .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                .replace(/(\d+)\s*²/g, (match, p1) => `square(${p1})`)
+                .replace(/(\d+)\s*³/g, (match, p1) => `cube(${p1})`)
+                .replace(/(\d+)\s*⁻¹/g, (match, p1) => `negativesq(${p1})`)
                 .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                 .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                 .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
@@ -146,70 +156,80 @@ const handleInput = (value, isOperator = false) => {
         }
     }
 };
-    document.querySelectorAll('.button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const value = e.target.value || e.target.innerText;
-            const op = e.target.getAttribute('data-op');
+document.querySelectorAll('.button').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const value = e.target.value || e.target.innerText;
+        const op = e.target.getAttribute('data-op');
 
-            if (e.target.classList.contains('number')) {
-                input.value += value;
-            } else if (op) {
-                switch (op) {
-                    case 'clear':
+        if (e.target.classList.contains('number')) {
+            input.value += value;
+        } else if (op) {
+            switch (op) {
+                case 'clear':
+                    input.value = '';
+                    output.value = '';
+                    lastValue = '';
+                    break;
+                case 'delete':
+                    const cursorPosition = input.selectionStart;
+                    if (cursorPosition > 0) {
+                        input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
+                        input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                    }
+                    break;
+                case 'exp':
+                    input.value += '**';
+                    break;
+                case 'ans':
+                    input.value += lastValue;
+                    break;
+                case 'equals':
+                    try {
+                        let expression = input.value
+                            .replace(/×/g, '*')
+                            .replace(/÷/g, '/')
+                            .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
+                            .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
+                            .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
+                            .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
+                            .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
+                            .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
+                            .replace(/ln\(([^)]+)\)/g, (match, p1) => `ln(${p1})`)
+                            .replace(/log\(([^,]+),?([^)]*)\)/g, (match, p1, p2) => `log(${p1}, ${p2})`)
+                            .replace(/\|(-?\d+)\|/g, (match, p1) => `Math.abs(${p1})`)
+                            .replace(/(\d+)\s*²/g, (match, p1) => `square(${p1})`)
+                            .replace(/(\d+)\s*³/g, (match, p1) => `cube(${p1})`)
+                            .replace(/(\d+)\s*⁻¹/g, (match, p1) => `negativesq(${p1})`)
+                            .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
+                            .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
+                            .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
+
+                        const result = eval(expression);
+                        output.value = result;
+                        lastValue = result;
                         input.value = '';
-                        output.value = '';
-                        lastValue = '';
-                        break;
-                    case 'delete':
-                        const cursorPosition = input.selectionStart;
-                        if (cursorPosition > 0) {
-                            input.value = input.value.slice(0, cursorPosition - 1) + input.value.slice(cursorPosition);
-                            input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
-                        }
-                        break;
-                    case 'exp':
-                        input.value += '**';
-                        break;
-                    case 'ans':
-                        input.value += lastValue;
-                        break;
-                    case 'equals':
-                        try {
-                            let expression = input.value
-                                .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
-                                .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
-                                .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
-                                .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
-                                .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
-                                .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
-                                .replace(/ln\(([^)]+)\)/g, (match, p1) => `ln(${p1})`)
-                                .replace(/log\(([^,]+),?([^)]*)\)/g, (match, p1, p2) => `log(${p1}, ${p2})`)
-                                .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
-                                .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
-                                .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
-                                .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-                            const result = eval(expression);
-                            output.value = result;
-                            lastValue = result;
-                            input.value = '';
-                        } catch (error) {
-                            output.value = 'Error';
-                        }
-                        break;
-                    case 'add':
-                    case 'subtract':
-                    case 'multiply':
-                    case 'divide':
-                        input.value += (op === 'add' ? '+' :
-                                        op === 'subtract' ? '-' :
-                                        op === 'multiply' ? '*' :
-                                        '/');
-                        break;
-                }
+                    } catch (error) {
+                        output.value = 'Error';
+                    }
+                    break;
+                case 'add':
+                case 'subtract':
+                case 'multiply':
+                case 'divide':
+                case 'e-btn':
+                    input.value += (op === 'add' ? '+' :
+                                    op === 'subtract' ? '-' :
+                                    op === 'multiply' ? '×' :
+                                    op === 'divide' ? '÷' :
+                                    '');
+                    break;
             }
-            if (op !== 'equals') {
-                try {
-                    let expression = input.value
+        }
+        if (op !== 'equals') {
+            try {
+                let expression = input.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
                     .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                     .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                     .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -218,18 +238,22 @@ const handleInput = (value, isOperator = false) => {
                     .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
                     .replace(/ln\(([^)]+)\)/g, (match, p1) => `ln(${p1})`)
                     .replace(/log\(([^,]+),?([^)]*)\)/g, (match, p1, p2) => `log(${p1}, ${p2})`)
-                    .replace(/\|(-?\d+)\|/g,(match, p1) => `Math.abs(${p1})`)
+                    .replace(/\|(-?\d+)\|/g, (match, p1) => `Math.abs(${p1})`)
+                    .replace(/(\d+)\s*²/g, (match, p1) => `square(${p1})`)
+                    .replace(/(\d+)\s*³/g, (match, p1) => `cube(${p1})`)
+                    .replace(/(\d+)\s*⁻¹/g, (match, p1) => `negativesq(${p1})`)
                     .replace(/√([^ ]+)/g, (match, p1) => `Math.sqrt(${p1})`)
                     .replace(/p\(([^,]+),([^)]+)\)/g, (match, n, r) => `permutation(${n.trim()}, ${r.trim()})`)
                     .replace(/c\(([^,]+),([^)]+)\)/g, (match, n, r) => `combination(${n.trim()}, ${r.trim()})`);
-                    const evalResult = eval(expression);
-                    output.value = evalResult;
-                } catch (error) {
-                    output.value = 'Error';
-                }
+                const evalResult = eval(expression);
+                output.value = evalResult;
+            } catch (error) {
+                output.value = 'Error';
             }
-        });
+        }
     });
+});
+
 
     document.addEventListener('keydown', (e) => {
         const key = e.key;
@@ -302,5 +326,32 @@ function log(value, base = 10) {
 
     const roundedValue = parseFloat(logValue.toFixed(10));
 
+    return roundedValue;
+}
+
+function square(value) {
+    if (typeof value !== 'number') {
+        return 'error';
+    }
+    const squaredValue = Math.pow(value, 2);
+    const roundedValue = parseFloat(squaredValue.toFixed(10));
+    return roundedValue;
+}
+
+function cube(value) {
+    if (typeof value !== 'number') {
+        return 'error';
+    }
+    const squaredValue = Math.pow(value, 3);
+    const roundedValue = parseFloat(squaredValue.toFixed(10));
+    return roundedValue;
+}
+
+function negativesq(value) {
+    if (typeof value !== 'number') {
+        return 'error';
+    }
+    const squaredValue = Math.pow(value, -1);
+    const roundedValue = parseFloat(squaredValue.toFixed(10));
     return roundedValue;
 }
