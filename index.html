@@ -39,7 +39,7 @@
             </div>
             <div class="buttons">
               <div class="head-btn">
-                <input type="button" value="SHIFT" class="button shift-btn">
+                <input type="button" value="SHIFT" class="button shift-btn" id="shift-btn">
                 <input type="button" value="ALPHA" class="button alpha-btn">
                 <button class="button" id="left"><i class="fa-solid fa-caret-left"></i></button>
                 <button class="button" id="right"><i class="fa-solid fa-caret-right"></i></button>
@@ -47,10 +47,10 @@
                 <input type="button" value="2nd" class="button">
 
                 <div class="btn-parent">
-                  <input type="button" value="bin(" class="button number" data-op="bin">
+                  <input type="button" value="hex(" class="button number" data-op="bin">
                 </div>
                 <div class="btn-parent">
-                  <input type="button" value="hex(" class="button number" data-op="hex">
+                  <input type="button" value="bin(" class="button number" data-op="bin">
                 </div>
                 <div class="btn-parent">
                   <input type="button" value="oct(" class="button number" data-op="oct">
@@ -83,22 +83,40 @@
                   <input type="button" value="ln(" class="button number" data-op="ln">
                 </div>
 
-                <div class="btn-parent">
+                <div class="btn-parent" style="margin-top: 5px;">
+                  <div>
+                    <h6 class="lab-shi"></h6>
+                  </div>
                   <input type="button" value="-" class="button number" data-op="negative">
                 </div>
-                <div class="btn-parent">
+                <div class="btn-parent"  style="margin-top: 5px;">
+                  <div>
+                    <h6 class="lab-shi"></h6>
+                  </div>
                   <input type="button" value="ceil(" class="button number" data-op="ceil">
                 </div>
-                <div class="btn-parent">
+                <div class="btn-parent" style="margin-top: 5px;">
+                  <div>
+                    <h6 class="lab-shi"></h6>
+                  </div>
                   <input type="button" value="|x|" class="button number" data-op="absolute">
                 </div>
                 <div class="btn-parent">
+                  <div>
+                    <h6 class="lab-shi">sinh</h6>
+                  </div>
                   <input type="button" value="sin(" class="button number" data-op="sin">
                 </div>
                 <div class="btn-parent">
+                  <div>
+                    <h6 class="lab-shi">cosh</h6>
+                  </div>
                   <input type="button" value="cos(" class="button number" data-op="cos">
                 </div>
                 <div class="btn-parent">
+                  <div>
+                    <h6 class="lab-shi">tanh</h6>
+                  </div>
                   <input type="button" value="tan(" class="button number" data-op="tan">
                 </div>
 

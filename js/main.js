@@ -12,6 +12,8 @@ const labAlpha = document.querySelectorAll('.lab-alph')
 const leftButton = document.getElementById('left');
 const rightButton = document.getElementById('right');
 const negativeBtn =document.getElementById("negative-btn")
+let shiftButton = document.getElementById('shift-btn');
+
 // Start load
 window.addEventListener("load", function () {
     let preloader = document.querySelector("#preloader");
@@ -70,7 +72,6 @@ lightMode.addEventListener('click', () => {
     output.classList.toggle('screen-dark')
 });
 
-
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     let lastValue = '';
@@ -88,6 +89,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         input.focus()
     });
+    let shiftMode = false;
+
+shiftButton.addEventListener('click', function() {
+    shiftMode = !shiftMode;
+    if (shiftMode) {
+        shiftButton.classList.add('active')
+        activateShiftMode();
+    } else {
+        shiftButton.classList.remove('active');
+        deactivateShiftMode();
+    }
+});
+function activateShiftMode() {
+    document.querySelectorAll('.number').forEach(button => {
+        let operation = button.getAttribute('data-op');
+        if (operation === 'sin') {
+            button.value = 'sin⁻¹(';
+        } else if (operation === 'cos') {
+            button.value = 'cos⁻¹(';
+        } else if (operation === 'tan') {
+            button.value = 'tan⁻¹(';
+        }
+    });
+}
+function deactivateShiftMode() {
+    document.querySelectorAll('.number').forEach(button => {
+        let operation = button.getAttribute('data-op');
+        if (operation === 'sin') {
+            button.value = 'sin(';
+        } else if (operation === 'cos') {
+            button.value = 'cos(';
+        } else if (operation === 'tan') {
+            button.value = 'tan(';
+        }
+    });
+}
+
+
+
 const handleInput = (value, isOperator = false) => {
     if (isOperator) {
         switch (value) {
@@ -101,6 +141,9 @@ const handleInput = (value, isOperator = false) => {
                         .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                         .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
                         .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
+                        .replace(/sin⁻¹\(([^)]+)\)/g, (match, p1) => `arcSin(${p1})`)
+                        .replace(/cos⁻¹\(([^)]+)\)/g, (match, p1) => `arcCos(${p1})`)
+                        .replace(/tan⁻¹\(([^)]+)\)/g, (match, p1) => `arcTan(${p1})`)
                         .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                         .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                         .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
@@ -118,7 +161,7 @@ const handleInput = (value, isOperator = false) => {
                     lastValue = result;
                     input.value = '';
                 } catch (error) {
-                    output.value = 'Error';
+                    output.value = '';
                 }
                 break;
             case '+':
@@ -141,6 +184,9 @@ const handleInput = (value, isOperator = false) => {
                 .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                 .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                 .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
+                .replace(/sin⁻¹\(([^)]+)\)/g, (match, p1) => `arcSin(${p1})`)
+                .replace(/cos⁻¹\(([^)]+)\)/g, (match, p1) => `arcCos(${p1})`)
+                .replace(/tan⁻¹\(([^)]+)\)/g, (match, p1) => `arcTan(${p1})`)
                 .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                 .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                 .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
@@ -156,7 +202,7 @@ const handleInput = (value, isOperator = false) => {
             const evalResult = eval(expression);
             output.value = evalResult;
         } catch (error) {
-            output.value = 'Error';
+            output.value = '';
         }
     }
 };
@@ -197,6 +243,9 @@ document.querySelectorAll('.button').forEach(button => {
                             .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                             .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                             .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
+                            .replace(/sin⁻¹\(([^)]+)\)/g, (match, p1) => `arcSin(${p1})`)
+                            .replace(/cos⁻¹\(([^)]+)\)/g, (match, p1) => `arcCos(${p1})`)
+                            .replace(/tan⁻¹\(([^)]+)\)/g, (match, p1) => `arcTan(${p1})`)
                             .replace(/floor\(([^)]+)\)/g, (match, p1) => `Math.floor(${p1})`)
                             .replace(/round\(([^)]+)\)/g, (match, p1) => `Math.round(${p1})`)
                             .replace(/ceil\(([^)]+)\)/g, (match, p1) => `Math.ceil(${p1})`)
@@ -214,7 +263,7 @@ document.querySelectorAll('.button').forEach(button => {
                         lastValue = result;
                         input.value = '';
                     } catch (error) {
-                        output.value = 'Error';
+                        output.value = '';
                     }
                     break;
                 case 'add':
@@ -240,6 +289,9 @@ document.querySelectorAll('.button').forEach(button => {
                     .replace(/bin\(([^)]+)\)/g, (match, p1) => `bin(${p1})`)
                     .replace(/oct\(([^)]+)\)/g, (match, p1) => `oct(${p1})`)
                     .replace(/hex\(([^)]+)\)/g, (match, p1) => `hexx(${p1})`)
+                    .replace(/sin⁻¹\(([^)]+)\)/g, (match, p1) => `arcSin(${p1})`)
+                    .replace(/cos⁻¹\(([^)]+)\)/g, (match, p1) => `arcCos(${p1})`)
+                    .replace(/tan⁻¹\(([^)]+)\)/g, (match, p1) => `arcTan(${p1})`)
                     .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                     .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                     .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -258,26 +310,11 @@ document.querySelectorAll('.button').forEach(button => {
                 const evalResult = eval(expression);
                 output.value = evalResult;
             } catch (error) {
-                output.value = 'Error';
+                output.value = '';
             }
         }
     });
 });
-
-    document.addEventListener('keydown', (e) => {
-        const key = e.key;
-        if (!isNaN(key) || key === '.') {
-            handleInput(key);
-        } else if (['+', '-', '*', '/'].includes(key)) {
-            handleInput(key, true);
-        } else if (key === 'Enter') {
-            handleInput('equals', true);
-        } else if (key === 'Backspace') {
-            handleInput('delete', true);
-        } else if (key === 'Escape') {
-            handleInput('clear', true);
-        }
-    });
 });
 
 function factorial(n) {
@@ -285,9 +322,15 @@ function factorial(n) {
     return n * factorial(n - 1);
 }
 function permutation(n, r) {
+    if(n < r){
+        return 0;
+    }
     return factorial(n) / factorial(n - r);
 }
 function combination(n, r) {
+    if(n < r){
+        return 0;
+    }
     return factorial(n) / (factorial(r) * factorial(n - r));
 }
 
@@ -340,7 +383,7 @@ function log(value, base = 10) {
 
 function square(value) {
     if (typeof value !== 'number') {
-        return 'error';
+        return '';
     }
     const squaredValue = Math.pow(value, 2);
     const roundedValue = parseFloat(squaredValue.toFixed(10));
@@ -349,7 +392,7 @@ function square(value) {
 
 function cube(value) {
     if (typeof value !== 'number') {
-        return 'error';
+        return '';
     }
     const squaredValue = Math.pow(value, 3);
     const roundedValue = parseFloat(squaredValue.toFixed(10));
@@ -358,7 +401,7 @@ function cube(value) {
 
 function negativesq(value) {
     if (typeof value !== 'number') {
-        return 'error';
+        return '';
     }
     const squaredValue = Math.pow(value, -1);
     const roundedValue = parseFloat(squaredValue.toFixed(10));
@@ -379,4 +422,22 @@ function hexx(num){
     let pava= parseInt(num)
     console.log(pava)
     return  pava.toString(16).toUpperCase();
+}
+
+function arcSin(value) {
+    const radians = Math.asin(value);
+    const degrees = (radians * 180 / Math.PI).toFixed(1)
+    return degrees;
+}
+
+function arcCos(value) {
+    const radians = Math.acos(value);
+    const degrees = (radians * 180 / Math.PI).toFixed(1)
+    return degrees;
+}
+
+function arcTan(value) {
+    const radians = Math.atan(value);
+    const degrees = (radians * 180 / Math.PI).toFixed(1)
+    return degrees;
 }
