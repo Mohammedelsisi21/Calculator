@@ -127,7 +127,6 @@ function deactivateShiftMode() {
 }
 
 
-
 const handleInput = (value, isOperator = false) => {
     if (isOperator) {
         switch (value) {
