@@ -244,17 +244,16 @@ body {
 }
 .nav {
     position: absolute;
-    top: 0px;
-    width: 50%;
-    margin: 8px auto;
+    top: -43px;
+    width: 88%;
+    margin: auto;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-}
-@media (max-width: 767px){
-    .nav {
-        margin: 1px auto !important;
-    }
+    justify-content: space-between;
+    background: #221d23;
+    padding: 0px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
 }
 .open-btn {
     padding: 10px;

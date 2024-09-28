@@ -13,6 +13,7 @@ const leftButton = document.getElementById('left');
 const rightButton = document.getElementById('right');
 const negativeBtn =document.getElementById("negative-btn")
 let shiftButton = document.getElementById('shift-btn');
+let alphaButton = document.getElementById('alpha-btn');
 
 // Start load
 window.addEventListener("load", function () {
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         input.focus()
     });
-    let shiftMode = false;
+let shiftMode = false;
 
 shiftButton.addEventListener('click', function() {
     shiftMode = !shiftMode;
@@ -126,6 +127,35 @@ function deactivateShiftMode() {
     });
 }
 
+let alphaMode = false;
+
+alphaButton.addEventListener('click', function() {
+    alphaMode = !alphaMode;
+    if (alphaMode) {
+        shiftButton.classList.add('active')
+        activatealphaMode();
+    } else {
+        shiftButton.classList.remove('active');
+        deactivatealphaMode();
+    }
+});
+function activatealphaMode() {
+    document.querySelectorAll('.number').forEach(button => {
+        let operation = button.getAttribute('data-op');
+        if (operation === 'sin') {
+            button.value = '%';
+        }
+    });
+}
+function deactivatealphaMode() {
+    document.querySelectorAll('.number').forEach(button => {
+        let operation = button.getAttribute('data-op');
+        if (operation === 'sin') {
+            button.value = 'sin(';
+        }
+    });
+}
+
 
 const handleInput = (value, isOperator = false) => {
     if (isOperator) {
@@ -136,7 +166,7 @@ const handleInput = (value, isOperator = false) => {
                         .replace(/×/g, '*')
                         .replace(/÷/g, '/')
                         .replace(/e/g, `${Math.E}`)
-                        .replace(/π/g, '3.14')
+                        .replace(/π/g, `${Math.PI.toFixed(3)}`)
                         .replace(/sin\(([^)]+)\)/g, (match, p1) => `Math.sin(degreesToRadians(${p1}))`)
                         .replace(/cos\(([^)]+)\)/g, (match, p1) => `Math.cos(degreesToRadians(${p1}))`)
                         .replace(/tan\(([^)]+)\)/g, (match, p1) => `Math.tan(degreesToRadians(${p1}))`)
@@ -179,7 +209,7 @@ const handleInput = (value, isOperator = false) => {
                 .replace(/×/g, '*')
                 .replace(/÷/g, '/')
                 .replace(/e/g, `${Math.E}`)
-                .replace(/π/g, '3.14')
+                .replace(/π/g, `${Math.PI.toFixed(2)}`)
                 .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                 .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                 .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -238,7 +268,7 @@ document.querySelectorAll('.button').forEach(button => {
                             .replace(/×/g, '*')
                             .replace(/÷/g, '/')
                             .replace(/e/g, `${Math.E}`)
-                            .replace(/π/g, '3.14')
+                            .replace(/π/g, `${Math.PI.toFixed(3)}`)
                             .replace(/sin\(([^)]+)\)/g, (match, p1) => `sinDegrees(${p1})`)
                             .replace(/cos\(([^)]+)\)/g, (match, p1) => `cosDegrees(${p1})`)
                             .replace(/tan\(([^)]+)\)/g, (match, p1) => `tanDegrees(${p1})`)
@@ -284,7 +314,7 @@ document.querySelectorAll('.button').forEach(button => {
                     .replace(/×/g, '*')
                     .replace(/÷/g, '/')
                     .replace(/e/g, `${Math.E}`)
-                    .replace(/π/g, '3.14')
+                    .replace(/π/g, `${Math.PI.toFixed(3)}`)
                     .replace(/bin\(([^)]+)\)/g, (match, p1) => `bin(${p1})`)
                     .replace(/oct\(([^)]+)\)/g, (match, p1) => `oct(${p1})`)
                     .replace(/hex\(([^)]+)\)/g, (match, p1) => `hexx(${p1})`)
