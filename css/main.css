@@ -232,11 +232,11 @@ body {
 }
 .parent.animate::after,
 .parent.animate::before {
-    animation: open 1.3s linear forwards;
+    animation: open 1s linear forwards;
 }
 .parent.close::after,
 .parent.close::before {
-    animation: close 1.3s linear forwards;
+    animation: close 1s linear forwards;
 }
 .parent.color-change::after,
 .parent.color-change::before {
