@@ -212,32 +212,6 @@ body {
     border-radius: 10px;
     overflow: hidden;
 }
-.parent::after ,
-.parent::before {
-    content: "";
-    position: absolute;
-    left: 0px;
-    height: 50%;
-    width: 100%;
-    background: #000;
-    z-index: 100;
-}
-.parent::after {
-    bottom: 0px;
-    border-top: 2px solid var(--shift-color);
-}
-.parent::before {
-    top: 0px;
-    border-bottom: 2px solid var(--shift-color);
-}
-.parent.animate::after,
-.parent.animate::before {
-    animation: open 1s linear forwards;
-}
-.parent.close::after,
-.parent.close::before {
-    animation: close 1s linear forwards;
-}
 .parent.color-change::after,
 .parent.color-change::before {
     background: #4C4E8A !important;
@@ -249,25 +223,11 @@ body {
     margin: auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     background: #221d23;
     padding: 0px;
     border-radius: 10px;
     border: 1px solid #ddd;
-}
-.open-btn {
-    padding: 10px;
-    border: 0;
-    border-radius: 10px;
-    background: #000 ;
-    color: #fff ;
-    font-size: 20px;
-    font-weight: bold;
-    transition: var(--transition--main);
-    cursor: pointer;
-}
-.open-btn:hover {
-    background: rgb(0,0,0,.8);
 }
 /* Dark Mode */
 .light-mode-toggle, .light {
@@ -373,8 +333,6 @@ body {
     font-size: 10px;
     font-weight: bold;
 }
-
-
 .head-btn input, .head-btn button{
     width: 52px;
     margin: auto;

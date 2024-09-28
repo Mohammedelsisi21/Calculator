@@ -18,7 +18,5 @@
 <div style="display: flex; flex-wrap: wrap;">
     <img src="./image/1.png" width="100%" alt="Project ScreenShot" >
     <img src="./image/2.png" width="100%" alt="Project ScreenShot" >
-    <img src="./image/3.png" width="100%" alt="Project ScreenShot" >
-    <img src="./image/4.png" width="100%" alt="Project ScreenShot" >
 </div>
 

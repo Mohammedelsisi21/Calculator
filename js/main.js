@@ -1,7 +1,7 @@
 const body = document.body;
 const parentElement = document.querySelector('.parent');
-const openButton = document.querySelector('.open-btn');
-const icon = openButton.querySelector('.icon-lok');
+// const openButton = document.querySelector('.open-btn');
+// const icon = openButton.querySelector('.icon-lok');
 const lightMode = document.getElementById('light-mode-toggle');
 const iconDark = document.getElementById('iconDark');
 const calculator = document.getElementById('calculator');
@@ -25,25 +25,6 @@ window.addEventListener("load", function () {
 });
 // End load
 
-// start open
-openButton.addEventListener('click', () => {
-    if (parentElement.classList.contains('animate')) {
-        parentElement.classList.remove('animate');
-        parentElement.classList.add('close');
-        icon.classList.remove('fa-lock-open');
-        icon.classList.add('fa-unlock');
-        openButton.textContent = ' ';
-        openButton.appendChild(icon);
-    } else {
-        parentElement.classList.remove('close');
-        parentElement.classList.add('animate');
-        icon.classList.remove('fa-unlock');
-        icon.classList.add('fa-lock-open');
-        openButton.textContent = ' ';
-        openButton.appendChild(icon);
-    }
-});
-// End open
 lightMode.addEventListener('click', () => {
     // Change a body mode
     body.classList.toggle('light');
@@ -56,6 +37,7 @@ lightMode.addEventListener('click', () => {
         parentElement.classList.add('color-change');
         parentElement.classList.add('light');
         lightMode.classList.add('light')
+        calculator.classList.add('dark')
         openButton.classList.add('light')
     } else {
         iconDark.classList.remove('fa-moon');
@@ -64,10 +46,10 @@ lightMode.addEventListener('click', () => {
         parentElement.classList.remove('color-change');
         parentElement.classList.remove('light');
         lightMode.classList.remove('light')
+        calculator.classList.remove('light')
         openButton.classList.remove('light')
     }
     // light
-    calculator.classList.toggle('dark')
     logoDark.classList.toggle('logo-dark')
     input.classList.toggle('screen-dark')
     output.classList.toggle('screen-dark')
