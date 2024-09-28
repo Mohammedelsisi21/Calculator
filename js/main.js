@@ -32,14 +32,14 @@ openButton.addEventListener('click', () => {
         parentElement.classList.add('close');
         icon.classList.remove('fa-lock-open');
         icon.classList.add('fa-unlock');
-        openButton.textContent = 'Open';
+        openButton.textContent = ' ';
         openButton.appendChild(icon);
     } else {
         parentElement.classList.remove('close');
         parentElement.classList.add('animate');
         icon.classList.remove('fa-unlock');
         icon.classList.add('fa-lock-open');
-        openButton.textContent = 'Close';
+        openButton.textContent = ' ';
         openButton.appendChild(icon);
     }
 });
