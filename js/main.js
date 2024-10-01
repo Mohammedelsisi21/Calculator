@@ -39,6 +39,9 @@ lightMode.addEventListener('click', () => {
         lightMode.classList.add('light')
         calculator.classList.add('dark')
         openButton.classList.add('light')
+        logoDark.classList.remove('logo-dark')
+        input.classList.add('screen-dark')
+        output.classList.add('screen-dark')
     } else {
         iconDark.classList.remove('fa-moon');
         iconDark.classList.add('fa-sun');
@@ -48,11 +51,11 @@ lightMode.addEventListener('click', () => {
         lightMode.classList.remove('light')
         calculator.classList.remove('light')
         openButton.classList.remove('light')
+        logoDark.classList.add('logo-dark')
+        input.classList.remove('screen-dark')
+        output.classList.remove('screen-dark')
     }
     // light
-    logoDark.classList.toggle('logo-dark')
-    input.classList.toggle('screen-dark')
-    output.classList.toggle('screen-dark')
 });
 
 // script.js
